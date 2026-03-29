@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { Client } from "@gradio/client";
 
 const GENRES = [
   { value: "auto", label: "Auto", icon: "✨" },
@@ -178,23 +179,34 @@ export default function Home() {
     }, 6000);
 
     try {
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, genre, bpm }),
+      // Call HF Space directly from the browser — no server timeout limits
+      const client = await Client.connect("ronantakizawa/sampleflip");
+      const result = await client.predict("/generate_beat", {
+        prompt,
+        genre_override: genre === "auto" ? "auto" : genre,
+        bpm_override: bpm || 0,
       });
 
       clearInterval(interval);
-      const data = await res.json();
+      const data = result.data as any[];
+      const audioData = data[0];
+      const logs = (data[1] as string) || "";
 
-      if (!res.ok) {
-        setError(data.error || "Generation failed");
+      let audioUrl = "";
+      if (audioData && typeof audioData === "object" && audioData.url) {
+        audioUrl = audioData.url;
+      } else if (typeof audioData === "string") {
+        audioUrl = audioData;
+      }
+
+      if (!audioUrl) {
+        setError("No audio returned. The Space may be sleeping — try again.");
         return;
       }
 
       const beat: Beat = {
-        audioUrl: data.audioUrl,
-        logs: data.logs,
+        audioUrl,
+        logs,
         prompt,
         genre: genre === "auto" ? "auto" : genre,
         bpm,
@@ -206,7 +218,7 @@ export default function Home() {
       setStep(STEPS.length);
     } catch (err: any) {
       clearInterval(interval);
-      setError(err.message || "Network error");
+      setError(err.message || "Generation failed. The Space may be sleeping — try again in a minute.");
     } finally {
       setLoading(false);
     }
@@ -415,6 +427,7 @@ export default function Home() {
                 </div>
               </div>
             )}
+
             {/* How It Works */}
             <div className="mt-20 border-t border-zinc-800 pt-12">
               <h2 className="text-2xl font-bold text-center mb-2">
