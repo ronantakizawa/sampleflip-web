@@ -415,6 +415,73 @@ export default function Home() {
                 </div>
               </div>
             )}
+            {/* How It Works */}
+            <div className="mt-20 border-t border-zinc-800 pt-12">
+              <h2 className="text-2xl font-bold text-center mb-2">
+                From idea to mastered beat in 60 seconds.
+              </h2>
+              <p className="text-zinc-400 text-center mb-10 max-w-lg mx-auto">
+                No DAW. No samples. No music theory. Just describe what you hear in your head.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+                  <div className="text-2xl mb-3">1</div>
+                  <h3 className="font-semibold mb-1">You describe it</h3>
+                  <p className="text-zinc-400 text-sm">
+                    Type what you want. &ldquo;Dark trap with piano.&rdquo; &ldquo;Jazzy house with sax.&rdquo; Plain English. Our AI figures out the genre, tempo, and vibe.
+                  </p>
+                </div>
+                <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+                  <div className="text-2xl mb-3">2</div>
+                  <h3 className="font-semibold mb-1">AI finds the sample</h3>
+                  <p className="text-zinc-400 text-sm">
+                    We search YouTube for the perfect melody loop, filter out tutorials and full songs, reject samples with existing drums, and download only clean, usable audio.
+                  </p>
+                </div>
+                <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+                  <div className="text-2xl mb-3">3</div>
+                  <h3 className="font-semibold mb-1">Full beat, delivered</h3>
+                  <p className="text-zinc-400 text-sm">
+                    Custom drum patterns, chord-aware basslines, arrangement with transitions, professional mastering to -14 LUFS. Download the MP3 and use it.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-12 bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
+                <h3 className="font-semibold mb-3">What makes this different</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+                  <div className="flex gap-2">
+                    <span className="text-purple-400 shrink-0">&#10003;</span>
+                    <span className="text-zinc-300">Real samples, not AI-generated audio</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-purple-400 shrink-0">&#10003;</span>
+                    <span className="text-zinc-300">AI writes unique drum patterns every time</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-purple-400 shrink-0">&#10003;</span>
+                    <span className="text-zinc-300">Auto-detects BPM, key, and chord progression</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-purple-400 shrink-0">&#10003;</span>
+                    <span className="text-zinc-300">Bass follows the actual chords, not random notes</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-purple-400 shrink-0">&#10003;</span>
+                    <span className="text-zinc-300">10 genres: trap, drill, house, R&B, boom bap, techno...</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-purple-400 shrink-0">&#10003;</span>
+                    <span className="text-zinc-300">Broadcast-ready mastering with LUFS normalization</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-center text-zinc-600 text-xs mt-12 mb-4">
+                Built with Claude AI, librosa, and pyroomacoustics.
+              </p>
+            </div>
           </div>
         </div>
       </main>
